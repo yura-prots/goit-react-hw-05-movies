@@ -1,12 +1,18 @@
+import { Link } from 'react-router-dom';
+
 const MoviesList = ({ movies }) => {
   return (
     <>
       <ul>
-        {movies.map(movie => {
-          if (!movie.title) {
-            return console.log('No Movies');
+        {movies.map(({ id, title }) => {
+          if (title) {
+            return (
+              <li key={id}>
+                <Link to={`/movies/${id}`}>{title}</Link>
+              </li>
+            );
           }
-          return <li key={movie.id}>{movie.title}</li>;
+          return null;
         })}
       </ul>
     </>
