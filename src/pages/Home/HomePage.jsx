@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
+import { toast } from 'react-toastify';
 
 import { fetchTrending } from 'api/MoviedbAPI';
 import MoviesList from 'components/MoviesList';
@@ -17,7 +18,7 @@ const HomePage = () => {
 
         setMovies(response.results);
       } catch (error) {
-        console.log(error);
+        toast.error(error.message);
       } finally {
         setIsLoading(false);
       }
