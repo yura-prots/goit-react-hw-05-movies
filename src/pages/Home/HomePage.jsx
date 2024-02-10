@@ -4,7 +4,7 @@ import { RotatingLines } from 'react-loader-spinner';
 import { fetchTrending } from 'api/MoviedbAPI';
 import MoviesList from 'components/MoviesList';
 
-const Home = () => {
+const HomePage = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,4 +49,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
