@@ -10,9 +10,9 @@ const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-
     async function getMovies() {
+      setIsLoading(true);
+
       try {
         const response = await fetchTrending();
 
@@ -45,7 +45,7 @@ const HomePage = () => {
         />
       )}
 
-      {!isLoading && <MoviesList movies={movies} />}
+      <MoviesList movies={movies} />
     </>
   );
 };
