@@ -28,7 +28,22 @@ const Reviews = () => {
     getMovieReviews();
   }, [movieId]);
 
-  return <>{movieId}</>;
+  return (
+    <>
+      {reviews.length > 0 && !isLoading && (
+        <ul>
+          {reviews.map(({ id, author, content }) => {
+            return (
+              <li key={id}>
+                <p>Author: {author}</p>
+                <p>{content}</p>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </>
+  );
 };
 
 export default Reviews;
