@@ -20,3 +20,21 @@ export const fetchMoviesDetails = async movieId => {
 
   return response.data;
 };
+
+export const fetchCast = async movieId => {
+  const response = await axios({
+    url: `${BASE_URL}movie/${movieId}/credits?api_key=${API_KEY}`,
+    method: 'get',
+  });
+
+  return response.data;
+};
+
+export const fetchReviews = async movieId => {
+  const response = await axios({
+    url: `${BASE_URL}movie/${movieId}/reviews?api_key=${API_KEY}`,
+    method: 'get',
+  });
+
+  return response.data;
+};

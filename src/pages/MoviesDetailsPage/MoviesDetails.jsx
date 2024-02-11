@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import { RotatingLines } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
@@ -48,6 +48,11 @@ const MoviesDetailsPage = () => {
       )}
 
       {movieDetails.title}
+
+      <Link to="cast">Cast</Link>
+      <Link to="reviews">Reviews</Link>
+
+      <Outlet />
     </>
   );
 };
