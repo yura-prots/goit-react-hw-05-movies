@@ -1,5 +1,34 @@
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import { fetchReviews } from 'api/MoviedbAPI';
+
 const Reviews = () => {
-  return <div>Reviews</div>;
+  const [reviews, setReviews] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { movieId } = useParams();
+
+  useEffect(() => {
+    async function getMoviesReviews() {
+      setIsLoading(true);
+
+      try {
+        const response = await fetchReviews(movieId);
+
+        setReviews(response.results);
+      } catch (error) {
+        toast.error(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    getMoviesReviews();
+  }, [movieId]);
+
+  return <>{movieId}</>;
 };
 
 export default Reviews;
