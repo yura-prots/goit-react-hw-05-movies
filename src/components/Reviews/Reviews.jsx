@@ -11,7 +11,7 @@ const Reviews = () => {
   const { movieId } = useParams();
 
   useEffect(() => {
-    async function getMoviesReviews() {
+    async function getMovieReviews() {
       setIsLoading(true);
 
       try {
@@ -25,7 +25,7 @@ const Reviews = () => {
       }
     }
 
-    getMoviesReviews();
+    getMovieReviews();
   }, [movieId]);
 
   return <>{movieId}</>;

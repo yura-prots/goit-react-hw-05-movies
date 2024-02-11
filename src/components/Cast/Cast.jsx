@@ -11,7 +11,7 @@ const Cast = () => {
   const { movieId } = useParams();
 
   useEffect(() => {
-    async function getMoviesCast() {
+    async function getMovieCast() {
       setIsLoading(true);
 
       try {
@@ -25,10 +25,31 @@ const Cast = () => {
       }
     }
 
-    getMoviesCast();
+    getMovieCast();
   }, [movieId]);
 
-  return <>{movieId}</>;
+  return (
+    <>
+      {cast.length > 0 && !isLoading && (
+        <ul>
+          {cast.map(({ id, name, profile_path, character }) => {
+            return (
+              <li key={id}>
+                {profile_path && (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${profile_path}`}
+                    alt={name}
+                  />
+                )}
+                <p>{name}</p>
+                <p>Character: {character}</p>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </>
+  );
 };
 
 export default Cast;
