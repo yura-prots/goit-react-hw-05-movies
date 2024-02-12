@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { fetchCast } from 'api/MoviedbAPI';
+import Loader from 'components/Loader';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -30,6 +31,7 @@ const Cast = () => {
 
   return (
     <>
+      {isLoading && <Loader />}
       {cast.length > 0 && !isLoading && (
         <ul>
           {cast.map(({ id, name, profile_path, character }) => {

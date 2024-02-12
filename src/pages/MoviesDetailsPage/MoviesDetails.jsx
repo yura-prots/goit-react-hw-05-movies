@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, Outlet, useParams } from 'react-router-dom';
-import { RotatingLines } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { fetchMoviesDetails } from 'api/MoviedbAPI';
+import Loader from 'components/Loader';
 
 const MoviesDetailsPage = () => {
   const [movieDetails, setMovieDetails] = useState({});
@@ -33,19 +33,7 @@ const MoviesDetailsPage = () => {
     <>
       <h2>Movies Details</h2>
 
-      {isLoading && (
-        <RotatingLines
-          visible={true}
-          height="96"
-          width="96"
-          color="grey"
-          strokeWidth="5"
-          animationDuration="0.75"
-          ariaLabel="rotating-lines-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-        />
-      )}
+      {isLoading && <Loader />}
 
       {movieDetails.title}
 

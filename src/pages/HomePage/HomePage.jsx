@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { RotatingLines } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { fetchTrending } from 'api/MoviedbAPI';
 import MoviesList from 'components/MoviesList';
+import Loader from 'components/Loader';
 
 const HomePage = () => {
-  const [movies, setMovies] = useState([]);
+  const [trendingMovies, setTrendingMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const HomePage = () => {
       try {
         const response = await fetchTrending();
 
-        setMovies(response.results);
+        setTrendingMovies(response.results);
       } catch (error) {
         toast.error(error.message);
       } finally {
@@ -31,21 +31,11 @@ const HomePage = () => {
     <>
       <h2>Trending</h2>
 
-      {isLoading && (
-        <RotatingLines
-          visible={true}
-          height="96"
-          width="96"
-          color="grey"
-          strokeWidth="5"
-          animationDuration="0.75"
-          ariaLabel="rotating-lines-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-        />
-      )}
+      {isLoading && <Loader />}
 
-      <MoviesList movies={movies} />
+      {trendingMovies.length > 0 && !isLoading && (
+        <MoviesList movies={trendingMovies} />
+      )}
     </>
   );
 };

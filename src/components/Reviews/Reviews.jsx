@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { fetchReviews } from 'api/MoviedbAPI';
+import Loader from 'components/Loader';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -30,6 +31,7 @@ const Reviews = () => {
 
   return (
     <>
+      {isLoading && <Loader />}
       {reviews.length > 0 && !isLoading && (
         <ul>
           {reviews.map(({ id, author, content }) => {
