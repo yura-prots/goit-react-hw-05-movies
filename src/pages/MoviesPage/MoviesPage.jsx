@@ -1,18 +1,23 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { RotatingLines } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 
 import { fetchMovies } from 'api/MoviedbAPI';
 import Searchbar from 'components/Searchbar';
 import MoviesList from 'components/MoviesList';
+import Loader from 'components/Loader';
 
 const MoviesPage = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const movieName = searchParams.get('query') ?? '';
+
+  const handleSearch = query => {
+    const changeParams = query !== '' ? { query } : {};
+    setSearchParams(changeParams);
+  };
 
   useEffect(() => {
     async function searchMovie() {
@@ -38,23 +43,11 @@ const MoviesPage = () => {
 
   return (
     <>
-      <Searchbar />
+      <Searchbar onSearch={handleSearch} />
 
-      {isLoading && (
-        <RotatingLines
-          visible={true}
-          height="96"
-          width="96"
-          color="grey"
-          strokeWidth="5"
-          animationDuration="0.75"
-          ariaLabel="rotating-lines-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-        />
-      )}
+      {isLoading && <Loader />}
 
-      {movies.length > 0 && <MoviesList movies={movies} />}
+      {movies.length > 0 && !isLoading && <MoviesList movies={movies} />}
     </>
   );
 };
