@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 const Searchbar = ({ onSearch }) => {
@@ -35,6 +36,10 @@ const Searchbar = ({ onSearch }) => {
       </form>
     </>
   );
+};
+
+Searchbar.propTypes = {
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default Searchbar;
