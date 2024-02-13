@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { fetchMoviesDetails } from 'api/MoviedbAPI';
@@ -10,6 +10,7 @@ const MoviesDetailsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { movieId } = useParams();
+  const location = useLocation();
 
   useEffect(() => {
     async function getMoviesDetails() {
@@ -31,14 +32,22 @@ const MoviesDetailsPage = () => {
 
   return (
     <>
+      <Link to={location.state?.from ?? '/'}>
+        <button>Back</button>
+      </Link>
+
       <h2>Movies Details</h2>
 
       {isLoading && <Loader />}
 
       {movieDetails.title}
 
-      <Link to="cast">Cast</Link>
-      <Link to="reviews">Reviews</Link>
+      <Link to="cast" state={{ from: location }}>
+        Cast
+      </Link>
+      <Link to="reviews" state={{ from: location }}>
+        Reviews
+      </Link>
 
       <Outlet />
     </>
