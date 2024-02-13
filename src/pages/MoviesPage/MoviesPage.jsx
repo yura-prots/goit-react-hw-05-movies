@@ -6,6 +6,7 @@ import { fetchMovies } from 'api/MoviedbAPI';
 import Searchbar from 'components/Searchbar';
 import MoviesList from 'components/MoviesList';
 import Loader from 'components/Loader';
+import { BackButton } from './MoviesPage.styled';
 
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -47,7 +48,7 @@ const MoviesPage = () => {
   return (
     <>
       <Link to={backLinkRef.current.state?.from ?? '/'}>
-        <button>Back</button>
+        <BackButton>Back</BackButton>
       </Link>
 
       <Searchbar onSearch={handleSearch} />
