@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { fetchMovies } from 'api/MoviedbAPI';
@@ -11,6 +11,9 @@ const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const location = useLocation();
+  const backLinkRef = useRef(location);
 
   const movieName = searchParams.get('query') ?? '';
 
@@ -43,6 +46,10 @@ const MoviesPage = () => {
 
   return (
     <>
+      <Link to={backLinkRef.current.state?.from ?? '/'}>
+        <button>Back</button>
+      </Link>
+
       <Searchbar onSearch={handleSearch} />
 
       {isLoading && <Loader />}

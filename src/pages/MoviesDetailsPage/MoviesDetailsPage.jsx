@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -9,8 +9,10 @@ const MoviesDetailsPage = () => {
   const [movieDetails, setMovieDetails] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  const { movieId } = useParams();
   const location = useLocation();
+  const backLinkRef = useRef(location);
+
+  const { movieId } = useParams();
 
   useEffect(() => {
     async function getMoviesDetails() {
@@ -32,7 +34,7 @@ const MoviesDetailsPage = () => {
 
   return (
     <>
-      <Link to={location.state?.from ?? '/'}>
+      <Link to={backLinkRef.current.state?.from ?? '/'}>
         <button>Back</button>
       </Link>
 
@@ -42,12 +44,8 @@ const MoviesDetailsPage = () => {
 
       {movieDetails.title}
 
-      <Link to="cast" state={{ from: location }}>
-        Cast
-      </Link>
-      <Link to="reviews" state={{ from: location }}>
-        Reviews
-      </Link>
+      <Link to="cast">Cast</Link>
+      <Link to="reviews">Reviews</Link>
 
       <Outlet />
     </>
