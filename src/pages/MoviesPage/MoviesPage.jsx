@@ -33,6 +33,9 @@ const MoviesPage = () => {
 
       try {
         const response = await fetchMovies(movieName);
+        if (!response.total_results) {
+          return toast.info(`No movies with ${movieName} name`);
+        }
 
         setMovies(response.results);
       } catch (error) {
