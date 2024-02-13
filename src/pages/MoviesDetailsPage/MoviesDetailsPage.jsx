@@ -5,7 +5,13 @@ import { toast } from 'react-toastify';
 import { fetchMoviesDetails } from 'api/MoviedbAPI';
 import Loader from 'components/Loader';
 import Title from 'components/Title';
-import { Wrapper, Img } from './MoviesDetailsPage.styled';
+import {
+  Wrapper,
+  Img,
+  Links,
+  LinkEl,
+  BackButton,
+} from './MoviesDetailsPage.styled';
 
 const MoviesDetailsPage = () => {
   const [movieDetails, setMovieDetails] = useState({});
@@ -40,7 +46,7 @@ const MoviesDetailsPage = () => {
   return (
     <>
       <Link to={backLinkRef.current.state?.from ?? '/'}>
-        <button>Back</button>
+        <BackButton>Back</BackButton>
       </Link>
       {isLoading && <Loader />}
 
@@ -67,8 +73,10 @@ const MoviesDetailsPage = () => {
         </div>
       </Wrapper>
 
-      <Link to="cast">Cast</Link>
-      <Link to="reviews">Reviews</Link>
+      <Links>
+        <LinkEl to="cast">Cast</LinkEl>
+        <LinkEl to="reviews">Reviews</LinkEl>
+      </Links>
 
       <Outlet />
     </>
