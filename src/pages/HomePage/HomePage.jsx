@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { fetchTrending } from 'api/MoviedbAPI';
 import MoviesList from 'components/MoviesList';
 import Loader from 'components/Loader';
+import Title from 'components/Title';
 
 const HomePage = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -29,7 +30,7 @@ const HomePage = () => {
 
   return (
     <>
-      <h2>Trending</h2>
+      <Title title={'Trending'} />
 
       {isLoading && <Loader />}
 

@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 import { fetchMoviesDetails } from 'api/MoviedbAPI';
 import Loader from 'components/Loader';
+import Title from 'components/Title';
 
 const MoviesDetailsPage = () => {
   const [movieDetails, setMovieDetails] = useState({});
@@ -38,7 +39,7 @@ const MoviesDetailsPage = () => {
         <button>Back</button>
       </Link>
 
-      <h2>Movies Details</h2>
+      <Title title={'Movie Details'} />
 
       {isLoading && <Loader />}
 
