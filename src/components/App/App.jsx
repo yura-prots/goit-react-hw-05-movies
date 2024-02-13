@@ -11,7 +11,7 @@ const MoviesDetailsPage = lazy(() => import('pages/MoviesDetailsPage'));
 
 const App = () => {
   return (
-    <div>
+    <>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<HomePage />} />
@@ -24,7 +24,7 @@ const App = () => {
 
         <Route path="*" element={<HomePage />} />
       </Routes>
-    </div>
+    </>
   );
 };
 

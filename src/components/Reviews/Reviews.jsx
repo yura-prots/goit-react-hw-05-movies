@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 import { fetchReviews } from 'api/MoviedbAPI';
 import Loader from 'components/Loader';
+import { Wrapper } from './Reviews.styled';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -30,14 +31,14 @@ const Reviews = () => {
   }, [movieId]);
 
   return (
-    <>
+    <Wrapper>
       {isLoading && <Loader />}
       {reviews.length > 0 && !isLoading ? (
         <ul>
           {reviews.map(({ id, author, content }) => {
             return (
               <li key={id}>
-                <p>Author: {author}</p>
+                <b>Author: {author}</b>
                 <p>{content}</p>
               </li>
             );
@@ -46,7 +47,7 @@ const Reviews = () => {
       ) : (
         <p>We don`t have any review for this movie.</p>
       )}
-    </>
+    </Wrapper>
   );
 };
 

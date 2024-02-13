@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 import { fetchCast } from 'api/MoviedbAPI';
 import Loader from 'components/Loader';
+import { Wrapper } from './Cast.styled';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -30,7 +31,7 @@ const Cast = () => {
   }, [movieId]);
 
   return (
-    <>
+    <Wrapper>
       {isLoading && <Loader />}
       {cast.length > 0 && !isLoading && (
         <ul>
@@ -43,14 +44,14 @@ const Cast = () => {
                     alt={name}
                   />
                 )}
-                <p>{name}</p>
+                <b>{name}</b>
                 <p>Character: {character}</p>
               </li>
             );
           })}
         </ul>
       )}
-    </>
+    </Wrapper>
   );
 };
 
